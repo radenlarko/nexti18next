@@ -2,7 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Inter } from "next/font/google";
-import { Button, Flex, Select, Text } from "@chakra-ui/react";
+import { Button, Flex, HStack, Select, Text } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
 import { SSRConfig, useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -47,9 +47,22 @@ export default function Home() {
               </option>
             ))}
           </Select>
-          <Button as={Link} href="/about" locale={locale} mt={2}>
-            {t("button")}
-          </Button>
+          <HStack mt={2}>
+            <Button as={Link} href="/about" locale={locale}>
+              {t("button")}
+            </Button>
+            {["mercury", "venus", "earth"].map((item) => (
+              <Button
+                key={item}
+                as={Link}
+                href={`/planet/${item}`}
+                locale={locale}
+                textTransform="capitalize"
+              >
+                {item}
+              </Button>
+            ))}
+          </HStack>
         </Flex>
       </main>
     </>
