@@ -1,7 +1,8 @@
 import Head from "next/head";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { Inter } from "next/font/google";
-import { Flex, Select, Text } from "@chakra-ui/react";
+import { Button, Flex, Select, Text } from "@chakra-ui/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -42,6 +43,9 @@ export default function Home() {
               </option>
             ))}
           </Select>
+          <Button as={Link} href="/about" locale={locale} mt={2}>
+            About
+          </Button>
         </Flex>
       </main>
     </>
