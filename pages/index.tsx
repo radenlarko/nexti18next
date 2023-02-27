@@ -3,11 +3,15 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Inter } from "next/font/google";
 import { Button, Flex, Select, Text } from "@chakra-ui/react";
+import { GetStaticProps } from "next";
+import { SSRConfig, useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const { locale, locales, push } = useRouter();
+  const { t } = useTranslation("common");
   return (
     <>
       <Head>
@@ -27,7 +31,7 @@ export default function Home() {
           p={4}
         >
           <Text fontSize="2xl" textTransform="uppercase" letterSpacing="10px">
-            {`[${locale}]`} Hello World
+            {`[${locale}]`} {t("greeting")}
           </Text>
           <Select
             maxW="100px"
@@ -44,10 +48,18 @@ export default function Home() {
             ))}
           </Select>
           <Button as={Link} href="/about" locale={locale} mt={2}>
-            About
+            {t("button")}
           </Button>
         </Flex>
       </main>
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps<SSRConfig> = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale || "en", ["common"])),
+    },
+  };
+};
