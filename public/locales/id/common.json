@@ -1,4 +1,7 @@
 {
   "greeting": "Halo Dunia",
-  "button": "Tentang"
+  "about": "Tentang",
+  "mercury": "Merkurius",
+  "venus": "Venus",
+  "earth": "Bumi"
 }

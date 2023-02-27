@@ -49,7 +49,7 @@ export default function Home() {
           </Select>
           <HStack mt={2}>
             <Button as={Link} href="/about" locale={locale}>
-              {t("button")}
+              {t("about")}
             </Button>
             {["mercury", "venus", "earth"].map((item) => (
               <Button
@@ -59,7 +59,7 @@ export default function Home() {
                 locale={locale}
                 textTransform="capitalize"
               >
-                {item}
+                {t(item)}
               </Button>
             ))}
           </HStack>
