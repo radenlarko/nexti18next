@@ -1,10 +1,12 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { Inter } from "next/font/google";
 import { Flex, Select, Text } from "@chakra-ui/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const { locale, locales, push } = useRouter();
   return (
     <>
       <Head>
@@ -24,11 +26,21 @@ export default function Home() {
           p={4}
         >
           <Text fontSize="2xl" textTransform="uppercase" letterSpacing="10px">
-            Hello World
+            {`[${locale}]`} Hello World
           </Text>
-          <Select maxW="100px" mt={2}>
-            <option value="id">ID</option>
-            <option value="en">EN</option>
+          <Select
+            maxW="100px"
+            mt={2}
+            textTransform="uppercase"
+            placeholder="language"
+            value={locale}
+            onChange={(e) => push("/", undefined, { locale: e.target.value })}
+          >
+            {locales?.map((item) => (
+              <option key={item} value={item}>
+                {item}
+              </option>
+            ))}
           </Select>
         </Flex>
       </main>
